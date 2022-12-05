@@ -25,7 +25,7 @@ function renderEmotionRadios(cats) {
     for (const emotion of emotions) {
         radioItems += `
         <div class="radio">
-            <label for="$emotions">${emotion}</label>
+            <label for="${emotion}">${emotion}</label>
             <input
                 type = "radio"
                 id = "${emotion}"
