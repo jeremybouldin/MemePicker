@@ -5,8 +5,13 @@ const gifsOnlyCheckbox = document.getElementById('gifs-only-option')
 const memeModal = document.getElementById('meme-modal')
 const memeModalInner = document.getElementById('meme-modal-inner')
 const memeModalClose = document.getElementById('meme-modal-close-btn')
+const body = document.getElementById('container')
 
 memeModalClose.addEventListener('click', hideModal)
+
+// body.addEventListener('click', function(e){
+//     do
+// })
 
 emotionRadios.addEventListener('change', highlightCheckedOption)
 
@@ -32,7 +37,11 @@ function renderCat(){
     const catObject = getSingleCatObject()
     memeModal.style.display = 'flex'
     memeModalInner.innerHTML = `
-        <img class="cat-img" src="./images/${catObject.image}" alt="${catObject.alt}">
+        <img 
+            class="cat-img" 
+            src="/images/${catObject.image}" 
+            alt="${catObject.alt}"
+        >
     `
 }
 
