@@ -4,6 +4,13 @@ const emotionRadios = document.getElementById('emotion-radios')
 emotionRadios.addEventListener('change', highlightCheckedOption)
 
 function highlightCheckedOption(e){
+    // first remove the highlighting from all other radios
+    const radios = document.getElementsByClassName('radio')
+    for (let radio of radios){
+        radio.classList.remove('highlight')
+    }
+
+    // next assign highlighting to the selected radio
     document.getElementById(e.target.id).parentElement.classList.add('highlight')
 }
 
