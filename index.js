@@ -5,17 +5,23 @@ const gifsOnlyCheckbox = document.getElementById('gifs-only-option')
 const memeModal = document.getElementById('meme-modal')
 const memeModalInner = document.getElementById('meme-modal-inner')
 const memeModalClose = document.getElementById('meme-modal-close-btn')
-const body = document.getElementById('container')
 
 memeModalClose.addEventListener('click', hideModal)
-
-// body.addEventListener('click', function(e){
-//     do
-// })
 
 emotionRadios.addEventListener('change', highlightCheckedOption)
 
 getImgBtn.addEventListener('click', renderCat)
+
+window.addEventListener('click', function(e){
+    const clickedOnGetImage = e.target.id === 'get-image-btn'
+    const clickedOnModal = e.target.closest('.meme-modal')
+    const modalDisplaySetting = window.getComputedStyle(memeModal).display
+
+    if(!clickedOnGetImage && !clickedOnModal && modalDisplaySetting === 'flex'){
+        hideModal()
+    }
+    
+})
 
 function hideModal(){
     memeModal.style.display = 'none'
@@ -39,17 +45,17 @@ function renderCat(){
     memeModalInner.innerHTML = `
         <img 
             class="cat-img" 
-            src="/images/${catObject.image}" 
+            src="./images/${catObject.image}" 
             alt="${catObject.alt}"
         >
     `
 }
 
-//Narrows down the array to a single object selected randomly
+//Narrow down the array to a single object selected randomly
 function getSingleCatObject(){
     const catsArray = getMatchingCatsArray()
     if (catsArray.length === 1){
-        console.log(catsArray[0])
+        return catsArray[0]
     } else {
         const randomNumber = Math.floor(Math.random()*catsArray.length)
         return catsArray[randomNumber]
