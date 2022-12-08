@@ -12,16 +12,27 @@ emotionRadios.addEventListener('change', highlightCheckedOption)
 
 getImgBtn.addEventListener('click', renderCat)
 
-window.addEventListener('click', function(e){
-    const clickedOnGetImage = e.target.id === 'get-image-btn'
-    const clickedOnModal = e.target.closest('.meme-modal')
-    const modalDisplaySetting = window.getComputedStyle(memeModal).display
+//Closing the modal by clicking outside -- the hard way
+// window.addEventListener('click', function(e){
+//     const clickedOnGetImage = e.target.id === 'get-image-btn'
+//     const clickedOnModal = e.target.closest('.meme-modal')
+//     const modalDisplaySetting = window.getComputedStyle(memeModal).display
 
-    if(!clickedOnGetImage && !clickedOnModal && modalDisplaySetting === 'flex'){
+//     if(!clickedOnGetImage && !clickedOnModal && modalDisplaySetting === 'flex'){
+//         hideModal()
+//     }
+    
+// })
+
+//Closing the modal by clicking outside -- using stopPropagation
+window.addEventListener('click', function(e){
+    const clickedOnModal = e.target.closest('.meme-modal')
+
+    if(!clickedOnModal){
         hideModal()
     }
-    
 })
+
 
 function hideModal(){
     memeModal.style.display = 'none'
@@ -39,7 +50,8 @@ function highlightCheckedOption(e){
 }
 
 //renders out the cat image/gif
-function renderCat(){
+function renderCat(e){
+    e.stopPropagation()
     const catObject = getSingleCatObject()
     memeModal.style.display = 'flex'
     memeModalInner.innerHTML = `
